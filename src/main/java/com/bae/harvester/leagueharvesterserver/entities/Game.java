@@ -6,7 +6,6 @@
 //import jakarta.persistence.GenerationType;
 //import jakarta.persistence.Id;
 //import jakarta.persistence.Table;
-//import java.util.UUID;
 //import lombok.Getter;
 //import lombok.Setter;
 //import lombok.ToString;
@@ -17,16 +16,12 @@
 //@Setter
 //@ToString
 //@Entity
-//@Table(name = "player")
-//public class Player {
+//@Table(name = "game")
+//public class Game {
 //
 //  @Id
 //  @GeneratedValue(strategy = GenerationType.AUTO)
 //  @Column(name = "id", nullable = false)
 //  @JdbcTypeCode(SqlTypes.BIGINT)
 //  private Long id;
-//
-//  @Column(name = "puuid", nullable = false)
-//  @JdbcTypeCode(SqlTypes.UUID)
-//  private UUID puuid;
 //}
