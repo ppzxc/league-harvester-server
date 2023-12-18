@@ -28,6 +28,7 @@ public record EndOfGameBlock(
   Stats stats,
   @NotNull
   UUID puuid,
+  @NotNull
   Long summonerId,
   @NotNull
   String summonerName,

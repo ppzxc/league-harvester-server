@@ -39,7 +39,8 @@ public class EndOfGameBlockController {
   }
 
   @GetMapping("/games")
-  public PagedModel<EntityModel<GameDto>> getAll(@PageableDefault Pageable pageable, PagedResourcesAssembler<GameDto> assembler) {
+  public PagedModel<EntityModel<GameDto>> getAll(@PageableDefault(sort = "id") Pageable pageable,
+    PagedResourcesAssembler<GameDto> assembler) {
     return assembler.toModel(gameService.findAll(pageable).map(gameMapper::of));
   }
 }

@@ -1,8 +1,11 @@
+import com.github.gradle.node.npm.task.NpmTask
+
 plugins {
     java
     id("org.springframework.boot") version "3.2.0"
     id("io.spring.dependency-management") version "1.1.4"
     id("com.google.cloud.tools.jib") version "3.4.0"
+    id("com.github.node-gradle.node") version "7.0.1"
 }
 
 group = "com.bae.harvester"
@@ -36,11 +39,44 @@ dependencies {
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("com.navercorp.fixturemonkey:fixture-monkey-starter:1.0.0")
     testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter:1.0.0")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+node {
+    version = "18.18.0"
+    npmVersion = "10.2.0"
+    download = true
+    nodeProjectDir = file("${rootDir}/webapp")
+}
+
+tasks.register<NpmTask>("buildAdmin") {
+    args = listOf("run", "build")
+}
+
+tasks.register<Delete>("deleteFiles") {
+    delete(files("${rootDir}/src/main/resources/static"))
+}
+
+tasks.register<Copy>("copyFiles") {
+    from("${rootDir}/webapp/build")
+    into("${rootDir}/src/main/resources/static")
+}
+
+tasks.build {
+    finalizedBy("buildAdmin")
+}
+
+tasks.named("buildAdmin") {
+    finalizedBy("deleteFiles")
+}
+
+tasks.named("deleteFiles") {
+    finalizedBy("copyFiles")
 }
 
 jib {
