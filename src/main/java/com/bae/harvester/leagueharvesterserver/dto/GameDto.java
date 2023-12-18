@@ -1,5 +1,6 @@
 package com.bae.harvester.leagueharvesterserver.dto;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Builder;
 
@@ -37,7 +38,9 @@ public record GameDto(
   Long totalDamageDealtToChampions,
   Long totalDamageDealtToObjectives,
   Long totalDamageDealtToTurrets,
-  Long totalDamageTaken
+  Long totalDamageTaken,
+  LocalDateTime createdDate,
+  LocalDateTime lastModifiedDate
 ) {
 
 }

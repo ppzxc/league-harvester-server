@@ -36,4 +36,6 @@ export interface Game {
     totalDamageDealtToObjectives: number,
     totalDamageDealtToTurrets: number,
     totalDamageTaken: number,
+    createdDate: string,
+    lastModifiedDate: string,
 }
