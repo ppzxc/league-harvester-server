@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface GameService {
 
-  void record(Game game);
+  void recoding(Game game);
 
   Page<Game> findAll(Pageable pageable);
 }

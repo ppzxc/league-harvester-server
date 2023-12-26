@@ -1,6 +1,6 @@
 package com.bae.harvester.leagueharvesterserver.mapper;
 
-import com.bae.harvester.leagueharvesterserver.dto.EndOfGameBlock;
+import com.bae.harvester.leagueharvesterserver.dto.EndOfGameBlockDto;
 import com.bae.harvester.leagueharvesterserver.dto.GameDto;
 import com.bae.harvester.leagueharvesterserver.entities.Game;
 import org.mapstruct.Mapper;
@@ -27,7 +27,7 @@ public interface GameMapper {
     @Mapping(target = "totalDamageDealtToTurrets", source = "stats.totalDamageDealtToTurrets"),
     @Mapping(target = "totalDamageTaken", source = "stats.totalDamageTaken"),
   })
-  Game of(EndOfGameBlock endOfGameBlock);
+  Game of(EndOfGameBlockDto endOfGameBlockDto);
 
   GameDto of(Game game);
 }

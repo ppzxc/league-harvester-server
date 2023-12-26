@@ -2,6 +2,7 @@ package com.bae.harvester.leagueharvesterserver.entities;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,7 +15,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class BaseEntity {
 
   @CreatedDate
-  private LocalDateTime createdDate;
+  private LocalDate createdDate;
+
+  @CreatedDate
+  private LocalDateTime createdDateTime;
 
   @LastModifiedDate
   private LocalDateTime lastModifiedDate;

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import java.util.UUID;
 import lombok.Getter;
@@ -17,11 +18,13 @@ import org.hibernate.type.SqlTypes;
 @Setter
 @ToString
 @Entity
-@Table(name = "game")
+@Table(name = "games", indexes = {
+  @Index(name = "idx_created_date", columnList = "created_date"),
+})
 public class Game extends BaseEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   @JdbcTypeCode(SqlTypes.BIGINT)
   private Long id;

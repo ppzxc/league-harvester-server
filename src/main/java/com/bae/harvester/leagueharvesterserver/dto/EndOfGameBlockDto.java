@@ -6,7 +6,7 @@ import java.util.UUID;
 import lombok.Builder;
 
 @Builder
-public record EndOfGameBlock(
+public record EndOfGameBlockDto(
   Long gameId,
   Long reportGameId,
   @NotNull
