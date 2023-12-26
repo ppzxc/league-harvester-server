@@ -8,14 +8,6 @@ import java.time.temporal.WeekFields;
 
 public class WeekUtils {
 
-  public static void main(String[] args) {
-    System.out.println(getCurrentWeekOfMonth(LocalDate.now()));
-    for (int i = 0; i < 100; i++) {
-      LocalDate localDate = LocalDate.now().plusDays(i);
-      System.out.println(localDate + ", " + getLocalDateOfWeek(localDate));
-    }
-  }
-
   public static LocalDate getLocalDateOfWeek() {
     return getLocalDateOfWeek(LocalDate.now());
   }
