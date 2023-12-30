@@ -38,15 +38,14 @@ public class WeekUtils {
       return getCurrentWeekOfMonth(firstDayOfNextMonth);
     }
 
-    return new WeekSequence(localDate.getMonthValue(), weekOfMonth);
-//    return localDate.getMonthValue() + "월 " + weekOfMonth + "주차";
+    return new WeekSequence(localDate.getMonthValue(), localDate.with(weekFields.dayOfWeek(), DayOfWeek.MONDAY.getValue()), localDate.with(weekFields.dayOfWeek(), DayOfWeek.SUNDAY.getValue()), weekOfMonth);
   }
 
-  public record WeekSequence(int month, int sequence) {
+  public record WeekSequence(int month, LocalDate startOfWeek, LocalDate endOfWeek, int sequenceOfMonth) {
 
     @Override
     public String toString() {
-      return "%d월 %d주차".formatted(month, sequence);
+      return "%d월 %d주차".formatted(month, sequenceOfMonth);
     }
   }
 }

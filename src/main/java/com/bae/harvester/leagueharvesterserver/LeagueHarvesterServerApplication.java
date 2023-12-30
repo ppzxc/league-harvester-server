@@ -2,6 +2,7 @@ package com.bae.harvester.leagueharvesterserver;
 
 import com.bae.harvester.leagueharvesterserver.mapper.GameMapper;
 import com.bae.harvester.leagueharvesterserver.service.GameService;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,8 @@ public class LeagueHarvesterServerApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
+//    LocalDate localDate = LocalDate.now().minusDays(30);
+//    gameService.findWeeks(localDate).forEach(System.out::println);
 //		FixtureMonkey fixtureMonkey = FixtureMonkey.builder()
 //			.objectIntrospector(new BuilderArbitraryIntrospector())
 //			.plugin(new JakartaValidationPlugin())

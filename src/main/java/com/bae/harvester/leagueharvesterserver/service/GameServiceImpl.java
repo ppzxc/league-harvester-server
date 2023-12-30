@@ -1,12 +1,19 @@
 package com.bae.harvester.leagueharvesterserver.service;
 
 import com.bae.harvester.leagueharvesterserver.WeekUtils;
+import com.bae.harvester.leagueharvesterserver.WeekUtils.WeekSequence;
+import com.bae.harvester.leagueharvesterserver.dto.Weeks;
 import com.bae.harvester.leagueharvesterserver.entities.Game;
 import com.bae.harvester.leagueharvesterserver.entities.SuccessiveVictories;
 import com.bae.harvester.leagueharvesterserver.repositories.GameRepository;
-import com.bae.harvester.leagueharvesterserver.repositories.PlayerRepository;
 import com.bae.harvester.leagueharvesterserver.repositories.SuccessiveVictoriesRepository;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,5 +65,56 @@ public class GameServiceImpl implements GameService {
   @Override
   public Page<Game> findAll(Pageable pageable) {
     return gameRepository.findAll(pageable);
+  }
+
+  @Override
+  public List<Weeks> findWeeks() {
+    Optional<Game> first = gameRepository.findFirstByOrderByCreatedDateDesc();
+    if (first.isPresent()) {
+      return findWeeks(first.get().getCreatedDate());
+    } else {
+      return List.of();
+    }
+  }
+
+  @Override
+  public List<Weeks> findWeeks(LocalDate localDate) {
+    LocalDate now = LocalDate.now();
+    if (localDate.equals(now)) {
+      WeekSequence weekSequence = WeekUtils.getCurrentWeekOfMonth(now);
+      return List.of(Weeks.builder()
+        .month(weekSequence.month())
+        .startOfWeek(weekSequence.startOfWeek())
+        .endOfWeek(weekSequence.endOfWeek())
+        .sequenceOfMonth(weekSequence.sequenceOfMonth())
+        .build());
+    } else if (localDate.isAfter(now)) {
+      return List.of();
+    } else {
+      LocalDate baseDate = localDate;
+      Map<String, Weeks> results = new HashMap<>();
+      while (!baseDate.equals(now)) {
+        baseDate = baseDate.plusDays(1);
+        WeekSequence weekSequence = WeekUtils.getCurrentWeekOfMonth(baseDate);
+        String key = "%d%d".formatted(weekSequence.month(), weekSequence.sequenceOfMonth());
+        if (!results.containsKey(key)) {
+          results.put(key, Weeks.builder()
+            .month(weekSequence.month())
+            .startOfWeek(weekSequence.startOfWeek())
+            .endOfWeek(weekSequence.endOfWeek())
+            .sequenceOfMonth(weekSequence.sequenceOfMonth())
+            .build());
+        }
+      }
+      return results.values().stream().sorted((o1, o2) -> {
+        if (o1.month() > o2.month()) {
+          return 1;
+        } else if (o1.month() == o2.month()) {
+          return Integer.compare(o1.sequenceOfMonth(), o2.sequenceOfMonth());
+        } else {
+          return -1;
+        }
+      }).toList();
+    }
   }
 }
