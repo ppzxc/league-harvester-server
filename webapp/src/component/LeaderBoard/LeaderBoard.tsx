@@ -26,7 +26,8 @@ const LeaderBoard = ({successiveVictories}: Props) => {
     }
 
     return (
-        <List sx={{width: '100%', maxWidth: 240, bgcolor: 'background.paper'}}>
+        // <List sx={{width: '100%', maxWidth: 240, bgcolor: 'background.paper'}}>
+        <List>
             {listing()}
         </List>
     )

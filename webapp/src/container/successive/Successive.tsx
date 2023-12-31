@@ -6,6 +6,8 @@ import {SuccessiveVictories} from "../../model/successive";
 import LeaderBoard from "../../component/LeaderBoard/LeaderBoard";
 import moment from "moment/moment";
 import WeekSuccessive from "./WeekSuccessive";
+import {Grid, Paper} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const Successive = () => {
 
@@ -30,14 +32,19 @@ const Successive = () => {
 
     return (
         <>
-            <WeekSuccessive baseDate={baseDate} setBaseDate={setBaseDate}/>
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                minHeight="100vh">
-                <LeaderBoard successiveVictories={data}/>
-            </Box>
+            <Grid item xs={12} md={6} lg={6}>
+                <Paper sx={{p: 2, display: 'flex', flexDirection: 'column'}}>
+                    <WeekSuccessive baseDate={baseDate} setBaseDate={setBaseDate}/>
+                    <Box>
+                        <LeaderBoard successiveVictories={data}/>
+                    </Box>
+                </Paper>
+            </Grid>
+            <Grid item xs={12} md={6} lg={6}>
+                <Paper sx={{p: 2, display: 'flex', flexDirection: 'column'}}>
+                    <Typography>랭킹 보드에 유저 클릭시 유저 게임 플레이 목록 표시 위치</Typography>
+                </Paper>
+            </Grid>
         </>
     )
 }
