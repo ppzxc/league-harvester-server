@@ -23,9 +23,6 @@ public record EndOfGameBlockDto(
   Long spell1Id,
   Long spell2Id,
   Boolean leaver,
-  @Valid
-  @NotNull
-  Stats stats,
   @NotNull
   UUID puuid,
   @NotNull
@@ -35,7 +32,10 @@ public record EndOfGameBlockDto(
   Boolean botPlayer,
   Boolean localPlayer,
   @NotNull
-  Boolean winning
+  Boolean winning,
+  @Valid
+  @NotNull
+  Stats stats
 ) {
 
   @Builder

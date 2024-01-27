@@ -5,11 +5,13 @@ import com.bae.harvester.server.mapper.GameMapper;
 import com.bae.harvester.server.service.GameService;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+@Slf4j
 @AllArgsConstructor
 @EnableJpaAuditing
 @SpringBootApplication
@@ -27,7 +29,7 @@ public class LeagueHarvesterServerApplication implements CommandLineRunner {
   public void run(String... args) throws Exception {
     for (int i = 30; i >= 0; i--) {
       LocalDate baseDate = LocalDate.now().minusDays(i);
-      System.out.println(baseDate + " " + baseDate.getDayOfWeek() +" - " + weekCalculator.getCurrentWeekOfMonth(baseDate));
+      log.info("{} {} - {} ", baseDate, baseDate.getDayOfWeek(), weekCalculator.getCurrentWeekOfMonth(baseDate));
     }
   }
 }
