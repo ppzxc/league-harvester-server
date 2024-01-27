@@ -1,5 +1,6 @@
 package com.bae.harvester.server.controller;
 
+import com.bae.harvester.server.dto.EndOfGameBlockDto;
 import com.bae.harvester.server.dto.eog.EndOfGameBlockOriginalDto;
 import com.bae.harvester.server.mapper.GameMapper;
 import com.bae.harvester.server.mapper.PlayerMapper;
@@ -30,18 +31,11 @@ public class PlayerController {
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @PostMapping("/api/v1/players/{playerId}/games")
-//  public void postGame(@PathVariable UUID playerId, @Valid @RequestBody EndOfGameBlockDto endOfGameBlockDto) {
   public void postGame(@PathVariable UUID playerId, @Valid @RequestBody EndOfGameBlockOriginalDto endOfGameBlockOriginalDto) {
-    try {
-      log.info("{}", new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(endOfGameBlockOriginalDto));
-    } catch (JsonProcessingException e) {
-      throw new RuntimeException(e);
-    }
-//    endOfGameBlockOriginalDto
-
-//    log.info("uuid={} summoner.name={} winning={} ranked={} game.type={}", playerId, endOfGameBlockDto.summonerName(),
-//      endOfGameBlockDto.winning(), endOfGameBlockDto.ranked(), endOfGameBlockDto.gameType());
-//    playerService.recoding(playerMapper.of(endOfGameBlockDto));
-//    gameService.recoding(gameMapper.of(endOfGameBlockDto));
+    EndOfGameBlockDto endOfGameBlockDto = gameMapper.of(endOfGameBlockOriginalDto);
+    log.info("uuid={} summoner.name={} winning={} ranked={} game.type={}", playerId, endOfGameBlockDto.summonerName(),
+      endOfGameBlockDto.winning(), endOfGameBlockDto.ranked(), endOfGameBlockDto.gameType());
+    playerService.recoding(playerMapper.of(endOfGameBlockDto));
+    gameService.recoding(gameMapper.of(endOfGameBlockDto));
   }
 }

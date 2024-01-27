@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.bae.harvester"
-version = "0.0.8"
+version = "0.0.9"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
