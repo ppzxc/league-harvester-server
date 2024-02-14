@@ -10,6 +10,8 @@ public record EndOfGameBlockDto(
   Long gameId,
   Long reportGameId,
   @NotNull
+  Long profileIconId,
+  @NotNull
   String gameMode,
   @NotNull
   String gameType,

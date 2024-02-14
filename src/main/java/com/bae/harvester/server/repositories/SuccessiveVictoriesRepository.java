@@ -21,6 +21,7 @@ public interface SuccessiveVictoriesRepository extends JpaRepository<SuccessiveV
     FROM (SELECT row_number() OVER (PARTITION BY player_uuid ORDER BY winning_count DESC) AS row_number,
                  id,
                  player_uuid,
+                 profile_icon_id,
                  summoner_name,
                  winning_count,
                  closed_successive,

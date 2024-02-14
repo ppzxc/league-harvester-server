@@ -22,7 +22,6 @@ public class SuccessiveVictoriesController {
   @GetMapping("/api/v1/successive-victories")
   public List<SuccessiveVictoriesDto> getAll(
     @RequestParam(defaultValue = "#{T(java.time.LocalDate).now()}") LocalDate base) {
-    log.info("{}", base);
     return mapper.of(service.findAll(base));
   }
 }

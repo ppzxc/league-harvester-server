@@ -43,14 +43,18 @@ public class GameServiceImpl implements GameService {
             findGame.setTotalKill(findGame.getTotalKill() + game.getChampionsKilled());
             findGame.setTotalDeath(findGame.getTotalKill() + game.getChampionsKilled());
             findGame.setTotalAssist(findGame.getTotalKill() + game.getChampionsKilled());
+            findGame.setTotalAssist(findGame.getTotalKill() + game.getChampionsKilled());
+            findGame.setProfileIconId(game.getProfileIconId());
           } else {
             findGame.setClosedSuccessive(true);
+            findGame.setProfileIconId(game.getProfileIconId());
             successiveVictoriesRepository.save(findGame);
           }
         }
       }, () -> {
         SuccessiveVictories successiveVictories = new SuccessiveVictories();
         successiveVictories.setPlayerUuid(game.getPlayerUuid());
+        successiveVictories.setProfileIconId(game.getProfileIconId());
         successiveVictories.setSummonerName(game.getSummonerName());
         successiveVictories.setWinningCount(1L);
         successiveVictories.setClosedSuccessive(false);

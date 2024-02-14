@@ -30,6 +30,7 @@ public interface GameMapper {
     @Mapping(target = "totalDamageDealtToObjectives", source = "stats.totalDamageDealtToObjectives"),
     @Mapping(target = "totalDamageDealtToTurrets", source = "stats.totalDamageDealtToTurrets"),
     @Mapping(target = "totalDamageTaken", source = "stats.totalDamageTaken"),
+    @Mapping(target = "profileIconId", source = "profileIconId"),
   })
   Game of(EndOfGameBlockDto endOfGameBlockDto);
 
@@ -39,6 +40,7 @@ public interface GameMapper {
     return EndOfGameBlockDto.builder()
       .gameId(endOfGameBlockOriginalDto.getData().getGameId())
       .reportGameId(endOfGameBlockOriginalDto.getData().getReportGameId())
+      .profileIconId(endOfGameBlockOriginalDto.getData().getLocalPlayer().profileIconId)
       .gameMode(endOfGameBlockOriginalDto.getData().getGameMode())
       .gameType(endOfGameBlockOriginalDto.getData().getGameType())
       .detectedTeamPosition(endOfGameBlockOriginalDto.getData().getLocalPlayer().getDetectedTeamPosition())

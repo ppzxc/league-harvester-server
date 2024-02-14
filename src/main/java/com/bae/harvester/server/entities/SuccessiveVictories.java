@@ -32,6 +32,9 @@ public class SuccessiveVictories extends BaseEntity {
   @Column(name = "player_uuid", nullable = false)
   private UUID playerUuid;
 
+  @Column(name = "profile_icon_id", nullable = false)
+  private Long profileIconId;
+
   @Column(name = "summoner_name", nullable = false)
   private String summonerName;
 
